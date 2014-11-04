@@ -5,6 +5,9 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.hazelcast.config.Config;
+import com.hazelcast.config.GroupConfig;
+import com.hazelcast.config.MapConfig;
+import com.hazelcast.config.MapConfig.EvictionPolicy;
 import com.hazelcast.config.NetworkConfig;
 import com.hazelcast.core.Hazelcast;
 
@@ -16,7 +19,16 @@ public class CacheServerServletContextListener implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // Create configuration
-        Config config = new Config().setNetworkConfig(new NetworkConfig().setPort(CACHE_SERVER_PORT));
+        NetworkConfig networkConfig = new NetworkConfig().
+                setPort(CACHE_SERVER_PORT);
+        MapConfig mapConfig = new MapConfig().
+                setEvictionPolicy(EvictionPolicy.LRU).
+                setEvictionPercentage(25);
+        GroupConfig groupConfig = new GroupConfig("shared");
+        Config config = new Config().
+                setNetworkConfig(networkConfig).
+                setGroupConfig(groupConfig);
+        config.getMapConfigs().put("test", mapConfig);
 
         // Create Hazelcast instance
         Hazelcast.newHazelcastInstance(config);

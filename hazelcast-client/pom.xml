@@ -3,8 +3,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.topmonks</groupId>
-    <artifactId>hazelcast-poc</artifactId>
-    <name>Hazelcast Cache POC</name>
+    <artifactId>hazelcast-client</artifactId>
+    <name>Hazelcast Client POC</name>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -20,6 +20,21 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.18.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.18.2</version>
+        </dependency>
+        <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
             <version>3.3</version>
@@ -32,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>hazelcast-poc</finalName>
+        <finalName>hazelcast-client</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
